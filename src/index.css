@@ -688,8 +688,25 @@ ul { list-style: none; }
 }
 
 .about-highlight-item .icon {
-  font-size: 1.1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1.5px solid rgba(56, 189, 248, 0.25);
+  transition: transform 0.3s ease, background 0.3s ease;
 }
+
+.about-highlight-item:hover .icon {
+  transform: scale(1.1);
+  background: rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
 
 .about-tools {
   margin-top: 1.5rem;
@@ -777,37 +794,25 @@ ul { list-style: none; }
 }
 
 .service-icon-wrapper {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1.5px solid rgba(56, 189, 248, 0.25);
   margin-bottom: 1.5rem;
-  position: relative;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.service-icon-wrapper::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  opacity: 0.15;
+.service-card:hover .service-icon-wrapper {
+  transform: scale(1.1);
+  background: rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.5);
 }
 
-.si-purple { background: rgba(99, 102, 241, 0.15); }
-.si-purple::after { background: var(--color-primary); }
-.si-pink   { background: rgba(236, 72, 153, 0.15); }
-.si-pink::after { background: var(--color-pink); }
-.si-amber  { background: rgba(245, 158, 11, 0.15); }
-.si-amber::after { background: var(--color-accent); }
-.si-cyan   { background: rgba(6, 182, 212, 0.15); }
-.si-cyan::after { background: #06b6d4; }
-.si-green  { background: rgba(34, 197, 94, 0.15); }
-.si-green::after { background: #22c55e; }
-.si-rose   { background: rgba(244, 63, 94, 0.15); }
-.si-rose::after { background: #f43f5e; }
 
 .service-title {
   font-family: var(--font-heading);

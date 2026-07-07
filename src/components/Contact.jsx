@@ -132,7 +132,8 @@ export default function Contact() {
                 fontSize: '1.05rem',
                 boxShadow: '0 8px 24px rgba(34, 158, 217, 0.3)',
                 display: 'inline-flex',
-                alignItems: 'center'
+                alignItems: 'center',
+                whiteSpace: 'nowrap',
               }}
             >
               <TelegramIcon />
@@ -154,12 +155,14 @@ export default function Contact() {
                 fontSize: '1.05rem',
                 boxShadow: '0 8px 24px rgba(37, 211, 102, 0.3)',
                 display: 'inline-flex',
-                alignItems: 'center'
+                alignItems: 'center',
+                whiteSpace: 'nowrap',
               }}
             >
               <WhatsAppIcon />
               Message on WhatsApp
             </a>
+
 
             {/* Email Button */}
             <a
@@ -174,7 +177,8 @@ export default function Contact() {
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text)',
                 display: 'inline-flex',
-                alignItems: 'center'
+                alignItems: 'center',
+                whiteSpace: 'nowrap',
               }}
             >
               <EmailIcon />
