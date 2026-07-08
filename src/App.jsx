@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './index.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -10,31 +10,19 @@ import Skills from './components/Skills';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import CursorTrailer from './components/CursorTrailer';
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'dark';
   });
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [splashes, setSplashes] = useState([]);
-  const cursorRef = useRef(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  // Cursor glow tracker
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.left = `${e.clientX}px`;
-        cursorRef.current.style.top  = `${e.clientY}px`;
-      }
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   // Scroll-to-top visibility
   useEffect(() => {
@@ -43,29 +31,9 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleTheme = useCallback((e) => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-
-    // Splash origin: use click position if available, else center of screen
-    const x = e?.clientX ?? window.innerWidth / 2;
-    const y = e?.clientY ?? window.innerHeight / 2;
-
-    // Size = diagonal of the screen so it covers everything
-    const size = Math.ceil(Math.hypot(window.innerWidth, window.innerHeight) * 2);
-
-    const id = Date.now();
-    const color = nextTheme === 'light'
-      ? 'rgba(241, 245, 249, 0.95)'   // light cream splash
-      : 'rgba(8, 11, 20, 0.95)';       // dark splash
-
-    setSplashes((prev) => [...prev, { id, x, y, size, color }]);
-
-    // Switch theme at the 30% mark of the animation (≈210ms)
-    setTimeout(() => setTheme(nextTheme), 210);
-
-    // Remove splash after animation ends
-    setTimeout(() => setSplashes((prev) => prev.filter((s) => s.id !== id)), 750);
-  }, [theme]);
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -73,24 +41,10 @@ export default function App() {
 
   return (
     <>
-      {/* Cursor glow */}
-      <div ref={cursorRef} className="cursor-glow" aria-hidden="true" />
+      {/* Dynamic Cursor Trailer & Particle Trail */}
+      <CursorTrailer />
 
-      {/* Theme splash ripples */}
-      {splashes.map((s) => (
-        <div
-          key={s.id}
-          className="theme-splash"
-          aria-hidden="true"
-          style={{
-            left: s.x,
-            top: s.y,
-            width: s.size,
-            height: s.size,
-            background: s.color,
-          }}
-        />
-      ))}
+
 
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>
